@@ -12,18 +12,13 @@
       <mt-tab-item id="3">Test</mt-tab-item>
     </mt-navbar>
 
-    <div>
-      <mt-cell class="page-part" title="当前选中">{{ selected }}</mt-cell>
-    </div>
-
     <!-- tab-container -->
     <mt-tab-container v-model="selected">
       <mt-tab-container-item id="1">
 
-        <mt-cell :title="movie.title" v-for="movie in articles" :label="movie.genres[0]+'/'+movie.genres[1]+'/'+movie.genres[2]" is-link>
-          <span>ico</span>
+        <drcell :title="movie.title" v-for="movie in articles" :tags="movie.genres" :casts="movie.casts" :rate="movie.rating.average">
           <img slot="icon" :src="movie.images.medium" width="70" height="88">
-        </mt-cell>
+        </drcell>
 
       </mt-tab-container-item>
       <mt-tab-container-item id="2">
@@ -60,6 +55,7 @@
 <script>
 import footerTemp from './component/footerTemp.vue'
 import routerTemp from './component/routerTemp.vue'
+import drcell    from './component/cell/cell.vue'
 import Storage from './storage'
 
 import { Navbar, Tabbar, TabItem, Cell} from 'mint-ui'
@@ -77,7 +73,8 @@ export default {
       articles:[],
       ischange:'head-title',
       isClicked:false,
-      selected:'1'
+      selected:'1',
+
     }
   },
   // 计算属性
@@ -146,7 +143,7 @@ export default {
       deep:true
     }
   },
-  components:{footerTemp,routerTemp, Tabbar, Navbar, TabItem, TabContainer, TabContainerItem, Cell},
+  components:{footerTemp,routerTemp, Tabbar, Navbar, TabItem, TabContainer, TabContainerItem, Cell,drcell},
   // 自定义指令
   // directives:{
   //   'focus':{
