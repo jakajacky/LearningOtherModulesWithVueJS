@@ -1,41 +1,38 @@
 <template>
   <div>
+    <mt-header fixed title="列表">
+      <router-link to="/" slot="left">
+        <mt-button icon="back">返回</mt-button>
+      </router-link>
+    </mt-header>
 
+    <mt-navbar class="page-part" v-model="selected" :fixed=false>
+        <mt-tab-item id="1">Movie</mt-tab-item>
+      <mt-tab-item id="2">CNodeJS</mt-tab-item>
+      <mt-tab-item id="3">Test</mt-tab-item>
+    </mt-navbar>
 
+    <!-- tab-container -->
+    <mt-tab-container v-model="selected">
+      <mt-tab-container-item id="1">
 
-  <mt-header fixed title="列表">
-    <router-link to="/" slot="left">
-      <mt-button icon="back">返回</mt-button>
-    </router-link>
-  </mt-header>
+        <drcell :title="movie.title" v-for="(movie,index) in articles" :tags="movie.genres" :casts="movie.casts" :rate="movie.rating.average" is-link :to="'/detail/'+movie.id" :index="index">
+          <img slot="icon" :src="movie.images.medium" width="70" height="88">
+        </drcell>
 
-  <mt-navbar class="page-part" v-model="selected" :fixed=false>
-      <mt-tab-item id="1">Movie</mt-tab-item>
-    <mt-tab-item id="2">CNodeJS</mt-tab-item>
-    <mt-tab-item id="3">Test</mt-tab-item>
-  </mt-navbar>
-
-  <!-- tab-container -->
-  <mt-tab-container v-model="selected">
-    <mt-tab-container-item id="1">
-
-      <drcell :title="movie.title" v-for="(movie,index) in articles" :tags="movie.genres" :casts="movie.casts" :rate="movie.rating.average" is-link :to="lin" :index="index">
-        <img slot="icon" :src="movie.images.medium" width="70" height="88">
-      </drcell>
-
-    </mt-tab-container-item>
-    <mt-tab-container-item id="2">
-      <mt-cell v-for="n in 4" :title="'CNodeJS ' + n" :value="n"  is-link href="http://www.baidu.com" />
-    </mt-tab-container-item>
-    <mt-tab-container-item id="3">
-      <mt-cell v-for="n in 6" :title="'Test ' + n" :value="n" />
-    </mt-tab-container-item>
-  </mt-tab-container>
-  <br />
-  <br />
-  <br />
-  <br />
-</div>
+      </mt-tab-container-item>
+      <mt-tab-container-item id="2">
+        <mt-cell v-for="n in 4" :title="'CNodeJS ' + n" :value="n"  is-link href="http://www.baidu.com" />
+      </mt-tab-container-item>
+      <mt-tab-container-item id="3">
+        <mt-cell v-for="n in 6" :title="'Test ' + n" :value="n" />
+      </mt-tab-container-item>
+    </mt-tab-container>
+    <br />
+    <br />
+    <br />
+    <br />
+  </div>
 </template>
 
 <script>
@@ -99,23 +96,29 @@ export default {
     }
   },
   mounted:function(){
-    this.$http.jsonp('https://api.douban.com/v2/movie/top250?count=10', {}, {
-      header: {
+    this.articles = Storage.fetch();
+    if (this.articles) {
 
-      },
-      emulateJSON: true
-    }).then(function(response) {
-      // 这里是处理正确的回调
-      // console.log(this.articles);
-      this.articles = response.data.subjects
-      this.$nextTick(function(){
-        console.log('DOM更新了'+this);
-      })
+    }
+    else {
+      this.$http.jsonp('https://api.douban.com/v2/movie/top250?count=10', {}, {
+        header: {
 
-    }, function(response) {
-      // 这里是处理错误的回调
-      console.log(response)
-    });
+        },
+        emulateJSON: true
+      }).then(function(response) {
+        // 这里是处理正确的回调
+        // console.log(this.articles);
+        this.articles = response.data.subjects
+        this.$nextTick(function(){
+          console.log('DOM更新了'+this);
+        })
+
+      }, function(response) {
+        // 这里是处理错误的回调
+        console.log(response)
+      });
+    }
 
   },
   // 监听器
