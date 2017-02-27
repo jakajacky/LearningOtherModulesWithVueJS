@@ -1,24 +1,48 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
+  <div>
 
 
-    <!--  -->
 
-    <!-- <div style="text-align:center">
-      <router-link to="/">版权</router-link>
-      <router-link to="/second">简介</router-link>
-    </div>
-    <router-view class="view" v-bind:now="nowdate" v-on:dataFromRouterTemp="listenToRouterTemp"></router-view> -->
-  </div>
+  <mt-header fixed title="列表">
+    <router-link to="/" slot="left">
+      <mt-button icon="back">返回</mt-button>
+    </router-link>
+  </mt-header>
 
+  <mt-navbar class="page-part" v-model="selected" :fixed=false>
+      <mt-tab-item id="1">Movie</mt-tab-item>
+    <mt-tab-item id="2">CNodeJS</mt-tab-item>
+    <mt-tab-item id="3">Test</mt-tab-item>
+  </mt-navbar>
+
+  <!-- tab-container -->
+  <mt-tab-container v-model="selected">
+    <mt-tab-container-item id="1">
+
+      <drcell :title="movie.title" v-for="(movie,index) in articles" :tags="movie.genres" :casts="movie.casts" :rate="movie.rating.average" is-link :to="lin" :index="index">
+        <img slot="icon" :src="movie.images.medium" width="70" height="88">
+      </drcell>
+
+    </mt-tab-container-item>
+    <mt-tab-container-item id="2">
+      <mt-cell v-for="n in 4" :title="'CNodeJS ' + n" :value="n"  is-link href="http://www.baidu.com" />
+    </mt-tab-container-item>
+    <mt-tab-container-item id="3">
+      <mt-cell v-for="n in 6" :title="'Test ' + n" :value="n" />
+    </mt-tab-container-item>
+  </mt-tab-container>
+  <br />
+  <br />
+  <br />
+  <br />
+</div>
 </template>
 
 <script>
-import footerTemp from './component/footerTemp.vue'
-import routerTemp from './component/routerTemp.vue'
-import drcell    from './component/cell/cell.vue'
-import Storage from './storage'
+import footerTemp from '.././footerTemp.vue'
+import routerTemp from '.././routerTemp.vue'
+import drcell    from '.././cell/cell.vue'
+import Storage from '../../storage'
 
 import { Navbar, Tabbar, TabItem, Cell} from 'mint-ui'
 import { TabContainer, TabContainerItem } from 'mint-ui'
@@ -117,66 +141,3 @@ export default {
   // },
 }
 </script>
-
-<style>
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    /*text-align: center;*/
-    color: #2c3e50;
-    margin-top: 40px;
-  }
-
-  .mint-cell {
-    height: 100px;
-  }
-
-  a {
-    color: #42b983;
-  }
-
-  .head-title {
-
-  }
-
-  .head-title1 {
-    animation: myfirst 5s;
-    animation-direction: alternate;
-    animation-iteration-count: infinite;
-    -moz-animation: myfirst 5s;	/* Firefox */
-    -moz-animation-direction: alternate;
-    -moz-animation-iteration-count: infinite;
-    -webkit-animation: myfirst 5s;	/* Safari 和 Chrome */
-    -webkit-animation-direction: alternate;
-    -webkit-animation-iteration-count: infinite;
-    -o-animation: myfirst 5s;
-    -o-animation-direction: alternate;
-    -o-animation-iteration-count: infinite;
-  }
-
-  @keyframes myfirst
-  {
-  from {color:#20A0FF;}
-  to {color:cyan;}
-  }
-
-  @-moz-keyframes myfirst /* Firefox */
-  {
-  from {color:#20A0FF;}
-  to {color:cyan;}
-  }
-
-  @-webkit-keyframes myfirst /* Safari and Chrome */
-  {
-  from {color:#20A0FF;}
-  to {color:cyan;}
-  }
-
-  @-o-keyframes myfirst /* Opera */
-  {
-  from {color:#20A0FF;}
-  to {color:cyan;}
-  }
-
-</style>

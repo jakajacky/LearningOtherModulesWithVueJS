@@ -44,13 +44,37 @@ const router = new VueRouter({
   mode: 'history',
   base: __dirname,
   routes: [
+    // {
+    //   path: '/',
+    //   name: 'jian',
+    //   component: footerTemp
+    // },
+    // {
+    //   path: '/second',
+    //   name: 'jian',
+    //   component: routerTemp
+    // },
     {
       path: '/',
-      component: footerTemp
+      name: 'list',
+      component(resolve) {
+        require.ensure(['./component/List/list.vue'], ()=>{
+          resolve(require('./component/List/list.vue'));
+        });
+      },
+
+      meta: {requiresAuth: true}
     },
     {
-      path: '/second',
-      component: routerTemp
+      path: '/detail/:id',
+      name: 'detail',
+      component(resolve) {
+        require.ensure(['./component/Detail/detail.vue'], ()=>{
+          resolve(require('./component/Detail/detail.vue'));
+        });
+      },
+
+      meta: {requiresAuth: true}
     }
   ]
 });
