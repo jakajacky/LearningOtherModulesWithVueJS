@@ -93,8 +93,11 @@ export default {
 
   computed: {
     href() {
+
       if (this.to && !this.added && this.$router) {
+
         const resolved = this.$router.match(this.to);
+        console.log('----='+resolved.matched.length+'====='+this.to);
         if (!resolved.matched.length) return this.to;
 
         this.$nextTick(() => {
@@ -134,6 +137,7 @@ export default {
     handleClick($event) {
       $event.preventDefault();
       this.$router.push(this.href);
+      console.log("我点击了一行cell");
     }
   }
 };
@@ -141,7 +145,7 @@ export default {
 
 <style lang="css">
 
-  .dr-cell {
+  .drcell {
       background-color:#fff;
       box-sizing:border-box;
       color:inherit;

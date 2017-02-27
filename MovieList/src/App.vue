@@ -16,13 +16,13 @@
     <mt-tab-container v-model="selected">
       <mt-tab-container-item id="1">
 
-        <drcell :title="movie.title" v-for="movie in articles" :tags="movie.genres" :casts="movie.casts" :rate="movie.rating.average">
+        <drcell :title="movie.title" v-for="movie in articles" :tags="movie.genres" :casts="movie.casts" :rate="movie.rating.average" is-link :to="lin">
           <img slot="icon" :src="movie.images.medium" width="70" height="88">
         </drcell>
 
       </mt-tab-container-item>
       <mt-tab-container-item id="2">
-        <mt-cell v-for="n in 4" :title="'CNodeJS ' + n" :value="n" />
+        <mt-cell v-for="n in 4" :title="'CNodeJS ' + n" :value="n"  is-link href="http://www.baidu.com" />
       </mt-tab-container-item>
       <mt-tab-container-item id="3">
         <mt-cell v-for="n in 6" :title="'Test ' + n" :value="n" />
@@ -74,7 +74,7 @@ export default {
       ischange:'head-title',
       isClicked:false,
       selected:'1',
-
+      lin:'/second'
     }
   },
   // 计算属性
