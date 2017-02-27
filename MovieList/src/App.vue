@@ -16,7 +16,7 @@
     <mt-tab-container v-model="selected">
       <mt-tab-container-item id="1">
 
-        <drcell :title="movie.title" v-for="movie in articles" :tags="movie.genres" :casts="movie.casts" :rate="movie.rating.average" is-link :to="lin">
+        <drcell :title="movie.title" v-for="(movie,index) in articles" :tags="movie.genres" :casts="movie.casts" :rate="movie.rating.average" is-link :to="lin" :index="index">
           <img slot="icon" :src="movie.images.medium" width="70" height="88">
         </drcell>
 
@@ -30,16 +30,6 @@
     </mt-tab-container>
     <br />
     <br />
-    <!-- <div class="cel" style="display:flex; flex-direction:row; justify-content:flex-start; align-items:flex-start">
-      <img src="https://img3.doubanio.com/view/movie_poster_cover/spst/public/p511118051.jpg" width="70" height="88" />
-      <div style="display:flex; flex-direction:column; justify-content:flex-start; align-items:flex-start">
-        <li style="height:35px;">这个杀手不太冷</li>
-        <li style="font-size:14px;color:#888;height:30px;">言情/惊悚/动作</li>
-        <li style="font-size:14px;color:#888;">主演：李克林</li>
-      </div>
-
-
-    </div> -->
     <br />
     <br />
 

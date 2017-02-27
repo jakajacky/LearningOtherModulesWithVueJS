@@ -78,17 +78,18 @@ export default {
     icon: String,
     title: String,
     // 设置属性的 验证
-    tags:{
+    tags:{   // 电影标签
       type:Array,
       require:true,
     },
-    casts:{
+    casts:{  // 主演
       type:Array,
       require:true,
     },
     isLink: Boolean,
     value: {},
-    rate:Number,
+    rate:Number, // 评分
+    index:Number,       // 下标,实现点击cell，获取当前点击的cell的下标
   },
 
   computed: {
@@ -137,7 +138,7 @@ export default {
     handleClick($event) {
       $event.preventDefault();
       this.$router.push(this.href);
-      console.log("我点击了一行cell");
+      console.log(this.index+"我点击了一行cell"+this.href);
     }
   }
 };
