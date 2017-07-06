@@ -58,6 +58,9 @@ export default {
       if (art.id === this.currentId) {
         this.currentArt = art;
         this.imgSrc     = this.currentArt.images.large;
+        this.$nextTick(function() {
+
+        });
         console.log(this.imgSrc);
         this.average = this.currentArt.rating.average;
         this.selected_stars = parseInt(this.currentArt.rating.stars/10);

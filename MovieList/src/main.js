@@ -23,7 +23,7 @@ Vue.use(VueRouter);
 Vue.use(VueResource);
 
 // 2.x之后 需要 自定义过滤器
-Vue.filter('uppercase', function(value) {
+Vue.filter('uppercases', function(value) {
   if (!value) {
     return ''
   }
@@ -44,7 +44,7 @@ Vue.directive('focus', {
 // 创建一个路由器实例
 // 并且配置路由规则
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: __dirname,
   routes: [
     // {
